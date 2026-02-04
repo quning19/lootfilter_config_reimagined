@@ -340,15 +340,16 @@ return {-- The below settings are all optional, default/false entries will be as
        ---Rule 5: High Runes notification and ultra rune border and colors  
         {
             -- mid rune drops
-            codes = { "r20", "r21", "r22", "r23", "r24", "r25" },
+            codes = { "r20", "r21", "r22", "r23", "r24", "r25", "s20", "s21", "s22", "s23", "s24", "s25" },
             notify = "ÿcAMid Rune Dropped: {name}",
+            border = { 255, 0, 0, 190, 2 },
         },
         {
             -- high rune drops
-            codes = { "r26", "r27", "r28", "r29", "r30", "r31", "r32", "r33", "r34", "r35", "r36" },
+            codes = { "r26", "r27", "r28", "r29", "r30", "r31", "r32", "r33", "r34", "r35", "r36", "s26", "s27", "s28", "s29", "s30", "s31", "s32", "s33", "s34", "s35", "s36" },
             notify = "ÿc0High Rune Dropped: {name}",
             border = { 255, 0, 0, 255, 3 },
-            background = { 255, 255, 255, 255 },
+            -- background = { 255, 255, 255, 128 },
         },
        
         ---Rule 6: Unique Archons (Color swap?)  
@@ -1226,12 +1227,10 @@ return {-- The below settings are all optional, default/false entries will be as
 		},
         {
             -- boss essences but fancy border
-            codes = {"ka3", "ka1", "oos", "1os", "ooc", "1oc", "ooa", "1oa", "ooi", "1oi", "ooe", "1oe"},
+            codes = {"ka3", "1ka", "oos", "1os", "ooc", "1oc", "ooa", "1oa", "ooi", "1oi", "ooe", "1oe"},
             location = { "onground"},
             notify = "ÿcSOrb DroppedÿcS: {name}",
-            prefix = "ÿc0|/|",
-            suffix = "ÿc0|\\|",
-            border = { 255, 255, 255, 255, 3 },
+            border = { 255, 64, 128, 255, 3 },
             background = { 74, 74, 74, 255 }
         },
 
