@@ -7,12 +7,21 @@ return {-- The below settings are all optional, default/false entries will be as
     reload = "{pink}Ning's Filter 0.1 {grey} 02/04/26 {Green}reloaded.", --Allows you to specify a custom message when reloading the filter in-game
     debug = false, --Allows you to toggle Debug Mode on/off, which displays rule matching logic in-game for each item
     language = "enUS", --Allows you to set the filter language to one of the 13 currently supported languages
-    filter_titles = {"Mid-Game", "End-Game", "Show-All-Debug"}, --Allows you to specify the text displayed for varying filter 'levels'
+    filter_titles = {"Mid-Game", "End-Game", "Hide-Debug", "Info-Debug"}, --Allows you to specify the text displayed for varying filter 'levels'
     filter_level = 1, --Indicates your currently active filter level, normally controlled via D2RLAN hotkey
     allowOverrides = true, --Allows a mod author (or another filter) to include default/added rules to your loot filter
 
     --Begin Loot Filter Operations
     rules = {
+        -- 0.1 显示itype
+        {
+            codes = "allitems",
+            itype = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150},
+            location = { "onground", "onplayer", "equipped", "atvendor" },
+            prefix = "[itype={itype}]",
+            filter_levels = "4",
+        },
+
         -- 1. 杂项隐藏
         -- 1.1 低等药剂
         {
@@ -21,7 +30,7 @@ return {-- The below settings are all optional, default/false entries will be as
             area = NOT { "Rogue Encampment", "Lut Gholein", "Kurast Docktown", "The Pandemonium Fortress", "Harrogath" },
         },
         {
-            codes = { "hp5", "mp5" },
+            codes = {"mp5" },
             hide = true, 
             area = NOT { "Rogue Encampment", "Lut Gholein", "Kurast Docktown", "The Pandemonium Fortress", "Harrogath" },
             filter_levels = "2"
@@ -30,19 +39,15 @@ return {-- The below settings are all optional, default/false entries will be as
         -- 1.2 卷轴
         {
             codes = { "tsc", "isc"},
-            -- hide = true, 
+            hide = true, 
             area = NOT { "Rogue Encampment", "Lut Gholein", "Kurast Docktown", "The Pandemonium Fortress", "Harrogath" },
-            prefix = "[hidden 1]", --testing purposes
-            filter_levels = "3",
         },
         -- 1.3 白色箭袋
         {
             codes = {"aqv","cqv"},
             quality = "3-",
-            -- hide = true, 
+            hide = true, 
             area = NOT { "Rogue Encampment", "Lut Gholein", "Kurast Docktown", "The Pandemonium Fortress", "Harrogath" },
-            prefix = "[hidden 2]", --testing purposes
-            filter_levels = "3",
         },
         -- 2.1 装备等级[X], [E]显示
         { 
@@ -64,7 +69,7 @@ return {-- The below settings are all optional, default/false entries will be as
             location = { "onground", "onplayer", "equipped", "atvendor" },
             suffix = "{white}[S]{white}"
         },
-        -- 2.2.1 ETH Mark
+        -- 2.3 无形显示[ETH]
         { 
             codes = "allitems",
             ethereal = true,
@@ -72,23 +77,14 @@ return {-- The below settings are all optional, default/false entries will be as
             suffix = "{pink}[ETH]{white}"
         },
 
-        {
-            codes = "allitems",
-            itype = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150},
-            -- quality = "2-",
-            -- rarity = "1-",
-            prefix = "[{itype}]", --testing purposes
-            filter_levels = "3",
-        },
-        -- 2.3 符文之语提示
-        ---Rule 0c: Runewords beg you to keep them.
+        -- 2.4 符文之语提示
         { 
             codes = "allitems",
             runeword = true,
             suffix = "{white}[Rune Word]{white}" ,
             filter_levels = "1,2,3,4"
         },
-        -- 2.4 显示当前孔数量
+        -- 2.5 显示当前孔数量
         { 
             codes = "allitems",
             sockets = "2",
@@ -119,13 +115,14 @@ return {-- The below settings are all optional, default/false entries will be as
             identified = true,
             suffix = "{turquoise}○○○○○○({sockets}){white}"
         },
-        -- 2.5 描述显示最大空数量
+        -- 2.6 描述显示最大空数量
         {
 			codes="allitems",
 			location={"onground", "onplayer", "atvendor", "equipped"},
 			itype = {45,50},
 			prefix_desc="{grey}Max Sockets: {maxsock}\n"
 		},
+        -- 3. 重要物品显示
         -- 3.1 高级符文显示
         {
             codes = { "r20", "r21", "r22", "r23", "r24", "r25", "s20", "s21", "s22", "s23", "s24", "s25" },
@@ -169,7 +166,6 @@ return {-- The below settings are all optional, default/false entries will be as
             codes = { "bks", "bkd", "leg", "hdm", "ass", "tr1", "hst", "vip", "msf", "j34", "g34", "xyz", "g33", "qey", "qbr", "qhr", "qf1", 
             "qf2", "bbb", "mss", "hfh", "ice", "tr2" },
             notify = "{red}Quest Item: {name}",
-            hide = false,
             border = { 240, 0, 0, 230, 2 } 
         },
         -- 3.5. 高品质超强底材
@@ -179,7 +175,7 @@ return {-- The below settings are all optional, default/false entries will be as
             prefix = "{Red}|GB|{white}",
             border = { 255, 255, 255, 230, 2 } 
         },
-
+        -- 4. 白色品质装备显示
         -- 4.1 破碎装备隐藏
         {
             codes = NOT { "bks", "bkd", "leg", "hdm", "ass", "tr1", "hst", "vip", "msf", "j34", "g34", "xyz", "g33", "qey", "qbr", "qhr", "qf1", 
@@ -198,13 +194,11 @@ return {-- The below settings are all optional, default/false entries will be as
             sockets = "1",
             hide = true,
             area = NOT { "Rogue Encampment", "Lut Gholein", "Kurast Docktown", "The Pandemonium Fortress", "Harrogath" },
-            -- prefix = "[hidden 4]", --testing purposes
-            -- filter_levels = "3",
         },
-        
 
 
-        -- 4.3 高亮0/3/4孔头、胸、盾
+
+        -- 4.3 通用头、胸、盾
         -- 头 Bone Visage Demonhead Diadem Shako Hydraskull
         -- "uh9", "usk", "ci3", "uap", "ukp"
         -- 胸 Mage Plate,Dusk Shroud,Archon Plate,Wyrmhide,Great Hauberk
@@ -212,7 +206,7 @@ return {-- The below settings are all optional, default/false entries will be as
         -- 盾 Hyperion,Monarch,Troll Nest,Blade Barrier
         -- "urg","uit","ush","upk"
 
-        -- 4.3.1 精英 超强：高亮 200
+        -- 4.3.1 精英 超强：高亮 150
         {
             codes = "allitems",
             itype = {2, 3, 104},
@@ -221,32 +215,32 @@ return {-- The below settings are all optional, default/false entries will be as
             border = { 255, 255, 255, 150, 1 }, 
         },
 
-        -- 4.3.2 特定 精英：高亮 255 & 通知
+        -- 4.3.2 特定 精英 超强：高亮 225 & 通知
         {
             codes = {"uit","urg","ush","upk","uh9", "usk", "ci3", "uap", "ukp", "xtp", "uui", "utp", "uea", "urs"},
-            quality = "2,3",
+            quality = "3",
             notify = "Elite Armor Base: {white}{name}",
             border = { 255, 255, 255, 225, 2 }, 
         },
 
         -- 4.3.3 扩展 超强：高亮 150
-        {
-            codes = "allitems",
-            itype = {2, 3, 104},
-            quality = "3",
-            rarity = "1",
-            border = { 255, 255, 255, 150, 2 }, 
-        },
+        -- {
+        --     codes = "allitems",
+        --     itype = {2, 3, 104},
+        --     quality = "3",
+        --     rarity = "1",
+        --     border = { 255, 255, 255, 150, 2 }, 
+        -- },
 
         -- 4.3.4 普通 + 扩展 非超强：隐藏
         {
-            codes = "allitems",
+            codes = NOT {"uit","urg","ush","upk","uh9", "usk", "ci3", "uap", "ukp", "xtp", "uui", "utp", "uea", "urs"},
             itype = {2, 3, 104},
             quality = "2-",
             rarity = "1-",
-            hide = true,
-            -- prefix = "[hidden 5]", --testing purposes
-            -- filter_levels = "3",
+            -- hide = true,
+            prefix = "[hidden 5]", --testing purposes
+            filter_levels = "3,4",
         },
 
         -- 4.4 手套、鞋、腰带
@@ -257,8 +251,7 @@ return {-- The below settings are all optional, default/false entries will be as
             quality = "3-",
             rarity = "1-",
             hide = true,
-            -- prefix = "[hidden 6]", --testing purposes
-            -- filter_levels = "3",
+
         },
         -- 4.5 高亮职业装备
         -- 4.5.1 圣骑士盾 4r40
@@ -426,12 +419,6 @@ return {-- The below settings are all optional, default/false entries will be as
             -- filter_levels = "3",
         },
         -- 4.7.2 上限5,6孔精华武器，2,3孔: 隐藏
-        -- {
-        --     codes = {"2ax","mpi","wax","bax","btx","gax","gix","wsp","fla","mau","gma","flb","gsd","brn","spt","pik","scy","pax","hal","wsc","wst","lbw","sbb","lbb","swb","lwb","hxb","rxb","hfh","92a","9mp","9wa","9ba","9bt","9ga","9gi","9ws","9fl","9m9","9gm","9cr","9fb","9gd","9br","9st","9p9","9s8","9pa","9h9","9wc","8ws","8lb","8s8","8l8","8sw","8lw","8hx","8rx","72a","7mp","7wa","7ba","7bt","7ga","7gi","7ws","7fl","7m7","7gm","7cr","7fb","7gd","7br","7st","7p7","7s8","7pa","7h7","7wc","6ws","6lb","6s7","6l7","6sw","6lw","6hx","6rx","am1","am2","am3","am4","am6","am7","am8","am9","amb","amc","amd","ame"},
-        --     quality = "3-",
-        --     sockets = "1,2,3",
-        --     hide = true,
-        -- },
         {
             codes = "allitems",
             itype = {45},
@@ -549,15 +536,15 @@ return {-- The below settings are all optional, default/false entries will be as
             notify = "{yellow}Rare Jewel Dropped: {name}",
         },
 
-        -- 7.3 隐藏除手套、鞋、Orb、Wand非精华装备
+        -- 7.3 隐藏除amu,ring,charm,jew,手套、鞋、Orb、Wand非精华装备
         {
             codes = "allitems",
-            itype = NOT {10, 12, 13, 15, 16, 25, 59, 69},
+            itype = NOT {10, 12, 13, 15, 16, 25, 58, 68},
             quality = "6",
             rarity = "1-",
-            -- hide = true,
-            prefix = "[hidden G]", --testing purposes
-            filter_levels = "3",
+            hide = true,
+            -- prefix = "[hidden G]", --testing purposes
+            -- filter_levels = "3",
         },
 
         -- 8. 暗金装备显示
