@@ -238,9 +238,9 @@ return {-- The below settings are all optional, default/false entries will be as
             itype = {2, 3, 104},
             quality = "2-",
             rarity = "1-",
-            -- hide = true,
-            prefix = "[hidden 5]", --testing purposes
-            filter_levels = "3,4",
+            hide = true,
+            -- prefix = "[hidden 5]", --testing purposes
+            -- filter_levels = "3,4",
         },
 
         -- 4.4 手套、鞋、腰带
